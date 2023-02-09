@@ -6,14 +6,14 @@ use App\Enums\TodoPriorityEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Todo;
-use App\Traits\ResponseAPI;
+use App\Traits\ResponseApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 
 class TodoController extends Controller
 {
-    use ResponseAPI;
+    use ResponseApi;
     /**
      * Display a listing of the resource.
      *

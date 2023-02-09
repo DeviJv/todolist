@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait ResponseAPI
+trait ResponseApi
 {
     /**
      * Core of response
@@ -12,7 +12,7 @@ trait ResponseAPI
      * @param   integer         $statusCode  
      * @param   boolean         $isSuccess
      */
-    public function coreResponse($message, $data = null, $statusCode, $isSuccess = true)
+    public function coreResponse($message,  $statusCode, $isSuccess = true, $data = null)
     {
         // Check the params
         if (!$message) return response()->json(['message' => 'Message is required'], 500);

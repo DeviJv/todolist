@@ -23,14 +23,20 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Traits\\": "app/Traits/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+            
+        },
+        "files": [
+            "app/Traits/ResponseApi.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
+        
     },
     "scripts": {
         "post-autoload-dump": [

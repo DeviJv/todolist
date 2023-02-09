@@ -41,7 +41,7 @@ trait ResponseApi
      */
     public function success($message, $data, $statusCode = 200)
     {
-        return $this->coreResponse($message, $data, $statusCode);
+        return $this->coreResponse($message, $statusCode, true, $data);
     }
 
     /**
@@ -56,6 +56,6 @@ trait ResponseApi
         if ($statusCode == 0) {
             $statusCode = 500;
         }
-        return $this->coreResponse($message, null, $statusCode, false);
+        return $this->coreResponse($message, $statusCode, false, null);
     }
 }

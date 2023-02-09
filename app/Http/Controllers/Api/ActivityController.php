@@ -24,6 +24,7 @@ class ActivityController extends Controller
             $activity = Activity::all();
             return $this->success("Success", $activity);
         } catch (\Exception $e) {
+
             return $this->error($e->getMessage(), $e->getCode());
         }
     }

@@ -30,6 +30,7 @@ class TodoController extends Controller
             }
             return $this->success("Success", $todo);
         } catch (\Exception $e) {
+            dd($e);
             return $this->error($e->getMessage(), $e->getCode());
         }
     }

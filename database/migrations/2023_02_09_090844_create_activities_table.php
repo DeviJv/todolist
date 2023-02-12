@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id();
+            $table->id('activity_id');
             $table->string('title');
             $table->string('email')->unique();
             $table->softDeletes();

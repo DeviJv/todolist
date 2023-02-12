@@ -10,6 +10,8 @@ class Todo extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+    protected $primaryKey = 'todo_id';
+
 
     public function Todos()
     {

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
+            $table->id('todo_id');
             $table->string('title')->nullable();
             $table->enum('priority', ['low', 'medium', 'high', 'very-high']);
-            $table->foreignId('activity_id')->constrained('activities')->cascadeOnDelete();
+            $table->foreignId('activity_group_id')->references('activity_id')->on('activities')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

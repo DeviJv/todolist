@@ -24,7 +24,7 @@ class TodoController extends Controller
         try {
             $a_id = $request->get('activity_group_id');
             if ($a_id) {
-                $todo = Todo::where('activity_id', $a_id)->get();
+                $todo = Todo::where('activity_group_id', $a_id)->get();
             } else {
                 $todo = Todo::all();
             }
@@ -47,15 +47,15 @@ class TodoController extends Controller
             $request->validate([
                 'title' => 'required',
                 'priority' => [new Enum(TodoPriorityEnum::class)],
-                'activity_id' => 'required',
+                'activity_group_id' => 'required',
             ]);
-            $activity = Activity::find($request->activity_id);
-            if (!$activity) return $this->error("No activity with ID $request->activity_id", 404);
+            $activity = Activity::find($request->activity_group_id);
+            if (!$activity) return $this->error("No activity with ID $request->activity_group_id", 404);
 
             $todo = new Todo;
             $todo->title = $request->title;
             $todo->priority = $request->priority;
-            $todo->activity_id = $request->activity_id;
+            $todo->activity_group_id = $request->activity_group_id;
             $todo->save();
             return $this->success("Success", $todo);
         } catch (\Exception $e) {
@@ -95,18 +95,18 @@ class TodoController extends Controller
             $request->validate([
                 'title' => 'required',
                 'priority' => [new Enum(TodoPriorityEnum::class)],
-                'activity_id' => 'required',
+                'activity_group_id' => 'required',
             ]);
 
             $todo = Todo::find($id);
             if ($id && !$todo) return $this->error("No todo with ID $id", 404);
 
-            $activity = Activity::find($request->activity_id);
-            if (!$activity) return $this->error("No activity with ID $request->activity_id", 404);
+            $activity = Activity::find($request->activity_group_id);
+            if (!$activity) return $this->error("No activity with ID $request->activity_group_id", 404);
 
             $todo->title = $request->title;
             $todo->priority = $request->priority;
-            $todo->activity_id = $request->activity_id;
+            $todo->activity_group_id = $request->activity_group_id;
             $todo->save();
             return $this->success("Success", $todo);
         } catch (\Exception $e) {
@@ -148,7 +148,7 @@ class TodoController extends Controller
     {
         try {
             if ($id) {
-                $todo = Todo::onlyTrashed()->where('id', $id)->restore(); //restore byid
+                $todo = Todo::onlyTrashed()->where('todo_id', $id)->restore(); //restore byid
                 //restore byid
                 if (!$todo) return $this->error("No todo with ID $id", 404);
                 return $this->success("Success", $todo);

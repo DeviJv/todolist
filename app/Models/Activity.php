@@ -10,9 +10,9 @@ class Activity extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
-
+    protected $primaryKey = 'activity_id';
     public function todos()
     {
-        return $this->hasMany(Todo::class);
+        return $this->hasMany(Todo::class,'activity_group_id');
     }
 }

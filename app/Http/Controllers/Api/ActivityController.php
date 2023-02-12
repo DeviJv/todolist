@@ -22,7 +22,6 @@ class ActivityController extends Controller
     {
         try {
             $activity = Activity::all();
-           
             return $this->success("Success", $activity);
         } catch (\Exception $e) {
             
@@ -63,10 +62,8 @@ class ActivityController extends Controller
     {
         try {
             $activity = Activity::find($id);
-
             // Check the activity
             if (!$activity) return $this->error("No Activity with ID $id", 404);
-
             return $this->success("Success", $activity);
         } catch (\Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
@@ -87,10 +84,8 @@ class ActivityController extends Controller
                 'title' => 'required',
                 'email' => ['required', Rule::unique('activities')->ignore($id),],
             ]);
-
             $activity = Activity::find($id);
             if ($id && !$activity) return $this->error("No activity with ID $id", 404);
-
             $activity->title = $request->title;
             $activity->email = $request->email;
             $activity->save();
@@ -138,8 +133,8 @@ class ActivityController extends Controller
     {
         try {
             if ($id) {
-                $activity = Activity::onlyTrashed()->where('id', $id)->restore(); //restore byid
-                $todo = Todo::onlyTrashed()->where('activity_id', $id)->restore(); //restore byid
+                $activity = Activity::onlyTrashed()->where('todo_id', $id)->restore(); //restore byid
+                $todo = Todo::onlyTrashed()->where('activity_group_id', $id)->restore(); //restore byid
                 if (!$activity) return $this->error("No activity with ID $id", 404);
                 return $this->success("Success", $activity);
             } else {
